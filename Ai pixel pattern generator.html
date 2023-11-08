@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+
+<style id="webmakerstyle">
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+#pixel-pattern {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#pixel-pattern div {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin: 1px;
+}
+
+#controls {
+    display: flex;
+    margin-top: 20px;
+}
+
+#controls label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#controls input {
+    width: 50px;
+    margin-right: 10px;
+}
+
+#generate-button {
+    padding: 10px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Pixel Pattern Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <div id="pixel-pattern"></div>
+
+        <div id="controls">
+            <label for="width">Width:</label>
+            <input type="number" id="width" value="50" min="10" max="100">
+
+            <label for="height">Height:</label>
+            <input type="number" id="height" value="50" min="10" max="100">
+
+            <button id="generate-button">Generate Pattern</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+<script>
+const pixelPatternContainer = document.getElementById('pixel-pattern');
+const widthInput = document.getElementById('width');
+const heightInput = document.getElementById('height');
+const generateButton = document.getElementById('generate-button');
+
+generateButton.addEventListener('click', generatePattern);
+
+function generatePattern() {
+    const width = parseInt(widthInput.value);
+    const height = parseInt(heightInput.value);
+
+    while (pixelPatternContainer.firstChild) {
+        pixelPatternContainer.removeChild(pixelPatternContainer.firstChild);
+    }
+
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+            const pixel = document.createElement('div');
+            pixel.style.backgroundColor = getRandomColor();
+            pixelPatternContainer.appendChild(pixel);
+        }
+    }
+}
+
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+
+    return color;
+}
+
+//# sourceURL=userscript.js
+</script>
+</body>
+</html>
